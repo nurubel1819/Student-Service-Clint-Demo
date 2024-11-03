@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.studentserviceclintdemo.R;
+import com.example.studentserviceclintdemo.model.LoginModel;
+import com.example.studentserviceclintdemo.retrofit.ApiInterface;
+import com.example.studentserviceclintdemo.retrofit.RetrofitInstance;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UserLoginActivity extends AppCompatActivity {
 
@@ -41,6 +49,38 @@ public class UserLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserLoginActivity.this,UserRegistrationActivity.class));
+            }
+        });
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String phone = phone_number.getText().toString();
+                String pass = password.getText().toString();
+
+                LoginModel loginModel = new LoginModel();
+                loginModel.setPhone(phone);
+                loginModel.setPassword(pass);
+
+                ApiInterface apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
+
+                apiInterface.app_user_login(loginModel)
+                        .enqueue(new Callback<LoginModel>() {
+                            @Override
+                            public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
+                                LoginModel ack = response.body();
+                                if(ack.getPassword().equals("valid"))
+                                    Toast.makeText(UserLoginActivity.this,"Login successful",Toast.LENGTH_SHORT).show();
+                                else Toast.makeText(UserLoginActivity.this,"Invalid phone or password",Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<LoginModel> call, Throwable throwable) {
+                                Toast.makeText(UserLoginActivity.this,"Server error",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
             }
         });
     }
