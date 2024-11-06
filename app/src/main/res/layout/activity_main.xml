@@ -24,5 +24,12 @@
         android:background="@drawable/button_background_blue_to_tia"
         android:text="See all user"
         android:id="@+id/test_user_info_button_id"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:background="@drawable/button_background_blue_to_tia"
+        android:text="File upload"
+        android:id="@+id/test_file_upload"/>
 
 </LinearLayout>

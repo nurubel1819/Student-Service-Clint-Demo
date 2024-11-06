@@ -11,13 +11,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.studentserviceclintdemo.activity.FileUploadActivity;
 import com.example.studentserviceclintdemo.activity.TestUserActivity;
 import com.example.studentserviceclintdemo.activity.UserLoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     Button start_app_button;
-    Button test_user;
+    Button test_user,test_file_upload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         // take component id
         start_app_button = findViewById(R.id.start_app_button_id);
         test_user = findViewById(R.id.test_user_info_button_id);
+        test_file_upload = findViewById(R.id.test_file_upload);
 
         //work with component
         start_app_button.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, TestUserActivity.class));
+            }
+        });
+
+        test_file_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FileUploadActivity.class));
             }
         });
     }
