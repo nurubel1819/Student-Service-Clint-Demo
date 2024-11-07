@@ -1,14 +1,14 @@
 package com.example.studentserviceclintdemo.retrofit;
 
-import com.example.studentserviceclintdemo.model.FileResponseDto;
-import com.example.studentserviceclintdemo.model.ImageUploadResponse;
 import com.example.studentserviceclintdemo.model.LoginModel;
+import com.example.studentserviceclintdemo.model.ProductUploadResponseDto;
 import com.example.studentserviceclintdemo.model.UserModel;
 import com.example.studentserviceclintdemo.model.UserRegistrationModel;
 
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -31,11 +31,16 @@ public interface ApiInterface {
     @GET("user/see_all_user")
     Call<List<UserModel>> see_all_user();
 
-    @Multipart
-    @POST("/file/upload")
-    Call<FileResponseDto> upload_file(@Part MultipartBody.Part image);
-
     /*@Multipart
     @POST("/file/upload")
-    Call<ImageUploadResponse> upload_image_server(@Part MultipartBody.Part image);*/
+    Call<FileResponseDto> upload_file(@Part MultipartBody.Part image);*/
+    @Multipart
+    @POST("/file/upload")
+    Call<ProductUploadResponseDto> upload_product_details(@Part MultipartBody.Part image,
+                                                          @Part("category") RequestBody category,
+                                                          @Part("name") RequestBody name,
+                                                          @Part("price") RequestBody price,
+                                                          @Part("location") RequestBody location,
+                                                          @Part("description") RequestBody description);
+
 }

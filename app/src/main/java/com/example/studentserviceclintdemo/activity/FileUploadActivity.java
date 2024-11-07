@@ -56,10 +56,23 @@ public class FileUploadActivity extends AppCompatActivity {
 
         // code
         choose_image.setOnClickListener(new View.OnClickListener() {
+            //permission for image access in run time
             @Override
             public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(FileUploadActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(FileUploadActivity.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            100);
+                }
+                //image selection
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent,10);
 
-                if(ContextCompat.checkSelfPermission(getApplicationContext(),
+
+                /*if(ContextCompat.checkSelfPermission(getApplicationContext(),
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
                     Intent intent = new Intent();
                     intent.setType("image/*");
@@ -68,7 +81,7 @@ public class FileUploadActivity extends AppCompatActivity {
                 } else {
                     ActivityCompat.requestPermissions(FileUploadActivity.this,
                             new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                }
+                }*/
             }
         });
 

@@ -1,16 +1,16 @@
 package com.example.studentserviceclintdemo.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-public class ImageUploadResponse {
-
-    @SerializedName("fileName")
-    @Expose
+public class ProductUploadResponseDto {
     private String fileName;
-    @SerializedName("message")
-    @Expose
     private String message;
+
+    public ProductUploadResponseDto() {
+    }
+
+    public ProductUploadResponseDto(String fileName, String message) {
+        this.fileName = fileName;
+        this.message = message;
+    }
 
     public String getFileName() {
         return fileName;
@@ -27,5 +27,4 @@ public class ImageUploadResponse {
     public void setMessage(String message) {
         this.message = message;
     }
-
 }

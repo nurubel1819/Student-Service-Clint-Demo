@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:orientation="vertical"
     android:gravity="center"
+    android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -31,5 +32,12 @@
         android:background="@drawable/button_background_blue_to_tia"
         android:text="File upload"
         android:id="@+id/test_file_upload"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:background="@drawable/button_background_blue_to_tia"
+        android:text="Product upload"
+        android:id="@+id/product_upload_test_id"/>
 
 </LinearLayout>

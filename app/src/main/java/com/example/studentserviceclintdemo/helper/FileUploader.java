@@ -2,12 +2,10 @@ package com.example.studentserviceclintdemo.helper;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.FileUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.studentserviceclintdemo.model.FileResponseDto;
-import com.example.studentserviceclintdemo.model.ImageUploadResponse;
 import com.example.studentserviceclintdemo.retrofit.ApiInterface;
 import com.example.studentserviceclintdemo.retrofit.RetrofitInstance;
 
@@ -45,7 +43,7 @@ public class FileUploader {
 
         Log.d("api_interface",apiInterface.toString());
 
-        apiInterface.upload_file(body)
+        /*apiInterface.upload_file(body)
                 .enqueue(new Callback<FileResponseDto>() {
                     @Override
                     public void onResponse(Call<FileResponseDto> call, Response<FileResponseDto> response) {
@@ -57,20 +55,7 @@ public class FileUploader {
                         Toast.makeText(context,throwable.toString(),Toast.LENGTH_SHORT).show();
                         Log.e("upload_log", "Error: " + throwable);
                     }
-                });
-
-        /*apiInterface.upload_image_server(body)
-                .enqueue(new Callback<ImageUploadResponse>() {
-                    @Override
-                    public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
-                        Toast.makeText(context,"Upload successful",Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<ImageUploadResponse> call, Throwable throwable) {
-                        Toast.makeText(context,throwable.toString(),Toast.LENGTH_SHORT).show();
-                        Log.e("upload_log", "Error: " + throwable);
-                    }
                 });*/
+
     }
 }
