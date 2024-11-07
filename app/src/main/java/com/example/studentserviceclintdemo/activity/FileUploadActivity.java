@@ -1,7 +1,12 @@
 package com.example.studentserviceclintdemo.activity;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,12 +19,15 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.studentserviceclintdemo.R;
 import com.example.studentserviceclintdemo.helper.FileUploader;
+import com.example.studentserviceclintdemo.helper.RealPathUtil;
 
 public class FileUploadActivity extends AppCompatActivity {
 
@@ -28,6 +36,7 @@ public class FileUploadActivity extends AppCompatActivity {
 
     private static final int choose_image_request_code = 101;
     Uri image_uri;
+    String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +58,17 @@ public class FileUploadActivity extends AppCompatActivity {
         choose_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,choose_image_request_code);
+
+                if(ContextCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(intent,10);
+                } else {
+                    ActivityCompat.requestPermissions(FileUploadActivity.this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+                }
             }
         });
 
@@ -67,17 +84,15 @@ public class FileUploadActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode==RESULT_OK)
+        if(requestCode == 10 && resultCode == Activity.RESULT_OK)
         {
-            if(requestCode == choose_image_request_code)
-            {
-                imageView.setImageURI(data.getData());
-                // upload image in server
-                image_uri = data.getData();
-                Toast.makeText(FileUploadActivity.this,image_uri.toString(),Toast.LENGTH_SHORT).show();
-                Log.d("image_path",image_uri.toString());
-            }
+            image_uri = data.getData();
+            imageView.setImageURI(image_uri);
+            /*Context context = FileUploadActivity.this;
+            path = RealPathUtil.getRealPath(context,image_uri);
+            Bitmap bitmap = BitmapFactory.decodeFile(path);
+            imageView.setImageBitmap(bitmap);*/
+
         }
     }
 }

@@ -31,11 +31,11 @@ public interface ApiInterface {
     @GET("user/see_all_user")
     Call<List<UserModel>> see_all_user();
 
-    /*@Multipart
-    @POST("/file/upload")
-    Call<FileResponseDto> upload_file(@Part MultipartBody.Part image);*/
-
     @Multipart
     @POST("/file/upload")
-    Call<ImageUploadResponse> upload_image_server(@Part MultipartBody.Part image);
+    Call<FileResponseDto> upload_file(@Part MultipartBody.Part image);
+
+    /*@Multipart
+    @POST("/file/upload")
+    Call<ImageUploadResponse> upload_image_server(@Part MultipartBody.Part image);*/
 }

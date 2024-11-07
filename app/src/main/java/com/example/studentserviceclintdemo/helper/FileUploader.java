@@ -37,10 +37,15 @@ public class FileUploader {
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("image",file.getName(),requestFile);
 
+        Log.d("file_name",file.getName());
+        Log.d("file_path",file.getPath());
+
 
         ApiInterface apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
 
-        /*apiInterface.upload_file(body)
+        Log.d("api_interface",apiInterface.toString());
+
+        apiInterface.upload_file(body)
                 .enqueue(new Callback<FileResponseDto>() {
                     @Override
                     public void onResponse(Call<FileResponseDto> call, Response<FileResponseDto> response) {
@@ -52,8 +57,9 @@ public class FileUploader {
                         Toast.makeText(context,throwable.toString(),Toast.LENGTH_SHORT).show();
                         Log.e("upload_log", "Error: " + throwable);
                     }
-                });*/
-        apiInterface.upload_image_server(body)
+                });
+
+        /*apiInterface.upload_image_server(body)
                 .enqueue(new Callback<ImageUploadResponse>() {
                     @Override
                     public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
@@ -65,6 +71,6 @@ public class FileUploader {
                         Toast.makeText(context,throwable.toString(),Toast.LENGTH_SHORT).show();
                         Log.e("upload_log", "Error: " + throwable);
                     }
-                });
+                });*/
     }
 }
