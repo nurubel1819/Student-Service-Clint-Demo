@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -49,6 +50,7 @@ public class PostForProductActivity extends AppCompatActivity {
     Button upload_button;
 
     Uri selected_image_uri;
+    String image_real_path = "no_path";
 
     EditText name,price,description;
 
@@ -78,7 +80,7 @@ public class PostForProductActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getSelectedItem().toString();
                 //String item_another = parent.getItemAtPosition(position).toString();
-                Toast.makeText(PostForProductActivity.this,"item = "+item,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PostForProductActivity.this,"item = "+item,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -127,37 +129,42 @@ public class PostForProductActivity extends AppCompatActivity {
         upload_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //real path for select image
-                String image_real_path = RealPathUtil.getRealPath(PostForProductActivity.this,selected_image_uri);
+                if(image_real_path.equals("no_path") || name.getText().toString().isEmpty()
+                || category.getSelectedItem().toString().isEmpty() || price.getText().toString().isEmpty()
+                || location.getSelectedItem().toString().isEmpty() || description.getText().toString().isEmpty())
+                {
+                    Toast.makeText(PostForProductActivity.this,"select image and fill all text",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    //convert it path to file
+                    File file = new File(image_real_path);
 
-                //convert it path to file
-                File file = new File(image_real_path);
+                    //prepare file part
+                    RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),file);
+                    MultipartBody.Part body = MultipartBody.Part.createFormData("image",file.getName(),requestFile);
 
-                //prepare file part
-                RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),file);
-                MultipartBody.Part body = MultipartBody.Part.createFormData("image",file.getName(),requestFile);
+                    RequestBody product_category = RequestBody.create(MediaType.parse("multipart/form-data"),category.getSelectedItem().toString());
+                    RequestBody product_name = RequestBody.create(MediaType.parse("multipart/form-data"),name.getText().toString());
+                    RequestBody product_price = RequestBody.create(MediaType.parse("multipart/form-data"),price.getText().toString());
+                    RequestBody product_location = RequestBody.create(MediaType.parse("multipart/form-data"),location.getSelectedItem().toString());
+                    RequestBody product_description = RequestBody.create(MediaType.parse("multipart/form-data"),description.getText().toString());
 
-                RequestBody product_category = RequestBody.create(MediaType.parse("multipart/form-data"),category.getSelectedItem().toString());
-                RequestBody product_name = RequestBody.create(MediaType.parse("multipart/form-data"),name.getText().toString());
-                RequestBody product_price = RequestBody.create(MediaType.parse("multipart/form-data"),price.getText().toString());
-                RequestBody product_location = RequestBody.create(MediaType.parse("multipart/form-data"),location.getSelectedItem().toString());
-                RequestBody product_description = RequestBody.create(MediaType.parse("multipart/form-data"),description.getText().toString());
+                    ApiInterface apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
 
-                ApiInterface apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
+                    apiInterface.upload_product_details(body,product_category,product_name,product_price,product_location,product_description)
+                            .enqueue(new Callback<ProductUploadResponseDto>() {
+                                @Override
+                                public void onResponse(Call<ProductUploadResponseDto> call, Response<ProductUploadResponseDto> response) {
+                                    Toast.makeText(PostForProductActivity.this,response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                                }
 
-                apiInterface.upload_product_details(body,product_category,product_name,product_price,product_location,product_description)
-                        .enqueue(new Callback<ProductUploadResponseDto>() {
-                            @Override
-                            public void onResponse(Call<ProductUploadResponseDto> call, Response<ProductUploadResponseDto> response) {
-                                Toast.makeText(PostForProductActivity.this,"upload successful",Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onFailure(Call<ProductUploadResponseDto> call, Throwable throwable) {
-                                Toast.makeText(PostForProductActivity.this,"server error",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
+                                @Override
+                                public void onFailure(Call<ProductUploadResponseDto> call, Throwable throwable) {
+                                    Toast.makeText(PostForProductActivity.this,"server error",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
             }
         });
 
@@ -169,6 +176,7 @@ public class PostForProductActivity extends AppCompatActivity {
         {
             selected_image_uri = data.getData();
             imageView.setImageURI(selected_image_uri);
+            image_real_path = RealPathUtil.getRealPath(PostForProductActivity.this,selected_image_uri);
 
         }
     }

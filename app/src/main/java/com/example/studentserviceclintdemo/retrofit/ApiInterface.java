@@ -35,7 +35,7 @@ public interface ApiInterface {
     @POST("/file/upload")
     Call<FileResponseDto> upload_file(@Part MultipartBody.Part image);*/
     @Multipart
-    @POST("/file/upload")
+    @POST("/product/upload_with_image")
     Call<ProductUploadResponseDto> upload_product_details(@Part MultipartBody.Part image,
                                                           @Part("category") RequestBody category,
                                                           @Part("name") RequestBody name,
