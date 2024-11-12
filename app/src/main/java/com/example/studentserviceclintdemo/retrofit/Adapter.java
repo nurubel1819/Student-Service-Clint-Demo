@@ -4,14 +4,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.studentserviceclintdemo.R;
 import com.example.studentserviceclintdemo.model.UserModel;
 
+import java.io.File;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
@@ -38,6 +41,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
         holder.name.setText("Name : "+userModelList.get(position).getName().toString());
         holder.phone.setText("Phone : "+userModelList.get(position).getPhone().toString());
         holder.password.setText("Password : "+userModelList.get(position).getPassword().toString());
+        // load user image
+        String image_url = RetrofitInstance.getBase_url()+"file/images/"+"5b02fbbe-a032-4df5-902e-a8fefc890ebd"+".jpg";
+        Glide.with(context).load(image_url).into(holder.user_image);
     }
 
     @Override
@@ -48,6 +54,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         TextView id,name,phone,password;
+        ImageView user_image;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +62,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
             name = itemView.findViewById(R.id.user_name_id);
             phone = itemView.findViewById(R.id.user_phone_id);
             password = itemView.findViewById(R.id.user_password_id);
+            user_image = itemView.findViewById(R.id.id_contact_image);
         }
     }
 }

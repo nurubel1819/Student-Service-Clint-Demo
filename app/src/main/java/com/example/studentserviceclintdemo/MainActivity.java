@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.studentserviceclintdemo.activity.BottomNavigationActivity;
 import com.example.studentserviceclintdemo.activity.FileUploadActivity;
 import com.example.studentserviceclintdemo.activity.PostForProductActivity;
 import com.example.studentserviceclintdemo.activity.TestUserActivity;
@@ -19,7 +20,7 @@ import com.example.studentserviceclintdemo.activity.UserLoginActivity;
 public class MainActivity extends AppCompatActivity {
 
     Button start_app_button;
-    Button test_user,test_file_upload,product_upload;
+    Button test_user,test_file_upload,product_upload,test_bottom_nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         test_user = findViewById(R.id.test_user_info_button_id);
         test_file_upload = findViewById(R.id.test_file_upload);
         product_upload = findViewById(R.id.product_upload_test_id);
+        test_bottom_nav = findViewById(R.id.bottom_navigation_test_id);
 
         //work with component
         start_app_button.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, PostForProductActivity.class));
+            }
+        });
+
+        test_bottom_nav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BottomNavigationActivity.class));
             }
         });
     }

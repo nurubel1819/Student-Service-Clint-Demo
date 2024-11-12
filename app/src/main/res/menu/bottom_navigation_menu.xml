@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_menu_id"
+        android:icon="@drawable/home_menu_ic"
+        android:title="Home"/>
+    <item
+        android:id="@+id/tutor_menu_id"
+        android:icon="@drawable/tutor_menu_ic"
+        android:title="Tutor"/>
+    <item
+        android:id="@+id/post_menu_id"
+        android:icon="@drawable/post_menu_ic"
+        android:title="Post"/>
+    <item
+        android:id="@+id/product_menu_id"
+        android:icon="@drawable/product_menu_ic"
+        android:title="Product"/>
+    <item
+        android:id="@+id/account_menu_id"
+        android:icon="@drawable/account_menu_ic"
+        android:title="Account"/>
+</menu>
