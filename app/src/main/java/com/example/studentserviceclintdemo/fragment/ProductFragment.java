@@ -1,14 +1,33 @@
 package com.example.studentserviceclintdemo.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.studentserviceclintdemo.R;
+import com.example.studentserviceclintdemo.activity.BottomNavigationActivity;
+import com.example.studentserviceclintdemo.activity.TestUserActivity;
+import com.example.studentserviceclintdemo.model.ProductGetDto;
+import com.example.studentserviceclintdemo.retrofit.ApiInterface;
+import com.example.studentserviceclintdemo.retrofit.ProductAdapter;
+import com.example.studentserviceclintdemo.retrofit.RetrofitInstance;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +35,10 @@ import com.example.studentserviceclintdemo.R;
  * create an instance of this fragment.
  */
 public class ProductFragment extends Fragment {
+
+    // code here rubel
+    EditText search_product;
+    RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +83,38 @@ public class ProductFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        /*search_product = container.findViewById(R.id.search_product_id);
+        recyclerView = container.findViewById(R.id.product_recycle_view_id);*/
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_product, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        search_product = view.findViewById(R.id.search_product_id);
+        recyclerView = view.findViewById(R.id.product_recycle_view_id);
+
+        ApiInterface apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
+        apiInterface.get_all_product()
+                .enqueue(new Callback<List<ProductGetDto>>() {
+                    @Override
+                    public void onResponse(Call<List<ProductGetDto>> call, Response<List<ProductGetDto>> response) {
+                        List<ProductGetDto> all_product = response.body();
+                        ProductAdapter adapter = new ProductAdapter(getContext(),all_product);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        recyclerView.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ProductGetDto>> call, Throwable throwable) {
+                        Toast.makeText(getContext(),"data can't load",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 }

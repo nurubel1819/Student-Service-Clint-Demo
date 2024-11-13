@@ -5,20 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".fragment.ProductFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/search_product_id"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Product"/>
+            android:background="@drawable/edit_text_bg"
+            android:hint="search product"
+            android:textSize="25sp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_recycle_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </FrameLayout>

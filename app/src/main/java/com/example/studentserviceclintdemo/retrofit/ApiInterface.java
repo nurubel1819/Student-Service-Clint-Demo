@@ -1,6 +1,7 @@
 package com.example.studentserviceclintdemo.retrofit;
 
 import com.example.studentserviceclintdemo.model.LoginModel;
+import com.example.studentserviceclintdemo.model.ProductGetDto;
 import com.example.studentserviceclintdemo.model.ProductUploadResponseDto;
 import com.example.studentserviceclintdemo.model.UserModel;
 import com.example.studentserviceclintdemo.model.UserRegistrationModel;
@@ -42,5 +43,8 @@ public interface ApiInterface {
                                                           @Part("price") RequestBody price,
                                                           @Part("location") RequestBody location,
                                                           @Part("description") RequestBody description);
+    //get all product information
+    @GET("product/see_all_product")
+    Call<List<ProductGetDto>> get_all_product();
 
 }
