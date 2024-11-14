@@ -25,8 +25,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.studentserviceclintdemo.MainActivity;
 import com.example.studentserviceclintdemo.R;
 import com.example.studentserviceclintdemo.helper.RealPathUtil;
+import com.example.studentserviceclintdemo.localDatabase.LocalDB;
+import com.example.studentserviceclintdemo.model.LoginModel;
 import com.example.studentserviceclintdemo.model.ProductUploadResponseDto;
 import com.example.studentserviceclintdemo.retrofit.ApiInterface;
 import com.example.studentserviceclintdemo.retrofit.RetrofitInstance;
@@ -125,6 +128,10 @@ public class PostForProductActivity extends AppCompatActivity {
             }
         });
 
+        // database work
+        LocalDB localDB = new LocalDB(PostForProductActivity.this);
+        ArrayList<LoginModel> login_info = localDB.find_login_info();
+
         // upload button work
         upload_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,6 +142,10 @@ public class PostForProductActivity extends AppCompatActivity {
                 {
                     Toast.makeText(PostForProductActivity.this,"select image and fill all text",Toast.LENGTH_SHORT).show();
                 }
+                else if(login_info.isEmpty())
+                {
+                    Toast.makeText(PostForProductActivity.this,"Login your account",Toast.LENGTH_SHORT).show();
+                }
                 else
                 {
                     //convert it path to file
@@ -144,6 +155,10 @@ public class PostForProductActivity extends AppCompatActivity {
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),file);
                     MultipartBody.Part body = MultipartBody.Part.createFormData("image",file.getName(),requestFile);
 
+                    // find user phone number from local database
+                    String user_phone_number = login_info.get(0).getPhone();
+
+                    RequestBody phone_number = RequestBody.create(MediaType.parse("multipart/form-data"),user_phone_number);
                     RequestBody product_category = RequestBody.create(MediaType.parse("multipart/form-data"),category.getSelectedItem().toString());
                     RequestBody product_name = RequestBody.create(MediaType.parse("multipart/form-data"),name.getText().toString());
                     RequestBody product_price = RequestBody.create(MediaType.parse("multipart/form-data"),price.getText().toString());
@@ -152,7 +167,7 @@ public class PostForProductActivity extends AppCompatActivity {
 
                     ApiInterface apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
 
-                    apiInterface.upload_product_details(body,product_category,product_name,product_price,product_location,product_description)
+                    apiInterface.upload_product_details(body,phone_number,product_category,product_name,product_price,product_location,product_description)
                             .enqueue(new Callback<ProductUploadResponseDto>() {
                                 @Override
                                 public void onResponse(Call<ProductUploadResponseDto> call, Response<ProductUploadResponseDto> response) {

@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.studentserviceclintdemo.R;
+import com.example.studentserviceclintdemo.localDatabase.LocalDB;
 import com.example.studentserviceclintdemo.model.LoginModel;
 import com.example.studentserviceclintdemo.retrofit.ApiInterface;
 import com.example.studentserviceclintdemo.retrofit.RetrofitInstance;
@@ -71,7 +72,12 @@ public class UserLoginActivity extends AppCompatActivity {
                             public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
                                 LoginModel ack = response.body();
                                 if(ack.getPassword().equals("valid"))
+                                {
+                                    LocalDB localDB = new LocalDB(UserLoginActivity.this);
+                                    localDB.addLoginInfo(phone,pass);
                                     Toast.makeText(UserLoginActivity.this,"Login successful",Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(UserLoginActivity.this,BottomNavigationActivity.class));
+                                }
                                 else Toast.makeText(UserLoginActivity.this,"Invalid phone or password",Toast.LENGTH_SHORT).show();
                             }
 

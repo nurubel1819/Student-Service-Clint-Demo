@@ -84,9 +84,6 @@ public class ProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        /*search_product = container.findViewById(R.id.search_product_id);
-        recyclerView = container.findViewById(R.id.product_recycle_view_id);*/
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_product, container, false);
     }

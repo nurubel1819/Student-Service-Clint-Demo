@@ -2,6 +2,7 @@ package com.example.studentserviceclintdemo.model;
 
 public class ProductGetDto {
     private Long id;
+    private String phone;
     private String image;
     private String category;
     private String name;
@@ -18,6 +19,14 @@ public class ProductGetDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getImage() {

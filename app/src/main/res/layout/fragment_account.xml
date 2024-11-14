@@ -3,22 +3,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context=".fragment.AccountFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Account"/>
+            android:text="Your Information"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginTop="20dp"/>
+        <ImageView
+            android:id="@+id/account_image_view_id"
+            android:layout_gravity="center"
+            android:src="@drawable/user_image"
+            android:layout_marginTop="10dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"/>
+        <TextView
+            android:id="@+id/account_name_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_marginTop="25dp"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/account_phone_number_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone number"
+            android:textSize="20sp"/>
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/account_save_button_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:background="@color/tia"
+                android:textSize="20sp"
+                android:text="save"/>
+            <Button
+                android:id="@+id/account_logout_button_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:background="@color/red"
+                android:textSize="20sp"
+                android:layout_alignParentRight="true"
+                android:text="Logout"/>
+        </RelativeLayout>
     </LinearLayout>
 
 </FrameLayout>

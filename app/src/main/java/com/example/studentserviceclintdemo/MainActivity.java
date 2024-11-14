@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +18,16 @@ import com.example.studentserviceclintdemo.activity.FileUploadActivity;
 import com.example.studentserviceclintdemo.activity.PostForProductActivity;
 import com.example.studentserviceclintdemo.activity.TestUserActivity;
 import com.example.studentserviceclintdemo.activity.UserLoginActivity;
+import com.example.studentserviceclintdemo.localDatabase.LocalDB;
+import com.example.studentserviceclintdemo.model.LoginModel;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     Button start_app_button;
     Button test_user,test_file_upload,product_upload,test_bottom_nav;
+    TextView phone,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +47,23 @@ public class MainActivity extends AppCompatActivity {
         product_upload = findViewById(R.id.product_upload_test_id);
         test_bottom_nav = findViewById(R.id.bottom_navigation_test_id);
 
+        phone = findViewById(R.id.main_phone);
+        password = findViewById(R.id.main_password);
+
         //work with component
+        LocalDB localDB = new LocalDB(MainActivity.this);
+        ArrayList<LoginModel> login_info = localDB.find_login_info();
+        if(login_info.isEmpty())
+        {
+            Toast.makeText(MainActivity.this,"No login info found",Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            phone.setText(login_info.get(0).getPhone());
+            password.setText(login_info.get(0).getPassword());
+        }
+
+
         start_app_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
