@@ -25,6 +25,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.studentserviceclintdemo.R;
 import com.example.studentserviceclintdemo.helper.RealPathUtil;
 import com.example.studentserviceclintdemo.localDatabase.LocalDB;
+import com.example.studentserviceclintdemo.model.LocationModel;
 import com.example.studentserviceclintdemo.model.LoginModel;
 import com.example.studentserviceclintdemo.model.ProductUploadResponseDto;
 import com.example.studentserviceclintdemo.retrofit.ApiInterface;
@@ -32,6 +33,7 @@ import com.example.studentserviceclintdemo.retrofit.RetrofitInstance;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -70,14 +72,29 @@ public class PostForRentActivity extends AppCompatActivity {
         description = findViewById(R.id.rent_description_id);
         upload = findViewById(R.id.rent_upload_button_id);
 
-        // select location item
+        // find all location
         ArrayList<String> location_list = new ArrayList<>();
-        location_list.add("Pachuria");
-        location_list.add("gobra");
+        ApiInterface api = RetrofitInstance.getRetrofit().create(ApiInterface.class);
+        api.get_all_location()
+                .enqueue(new Callback<List<LocationModel>>() {
+                    @Override
+                    public void onResponse(Call<List<LocationModel>> call, Response<List<LocationModel>> response) {
+                        List<LocationModel> all_location = response.body();
+                        // load all location server to app
+                        for(int i=0;i<all_location.size();i++)
+                        {
+                            location_list.add(all_location.get(i).getLocation());
+                        }
+                        ArrayAdapter<String> adapter_location = new ArrayAdapter<>(PostForRentActivity.this, android.R.layout.simple_spinner_item,location_list);
+                        adapter_location.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+                        location.setAdapter(adapter_location);
+                    }
 
-        ArrayAdapter<String> adapter_location = new ArrayAdapter<>(PostForRentActivity.this, android.R.layout.simple_spinner_item,location_list);
-        adapter_location.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-        location.setAdapter(adapter_location);
+                    @Override
+                    public void onFailure(Call<List<LocationModel>> call, Throwable throwable) {
+                        Toast.makeText(PostForRentActivity.this,"Location not load",Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         // image upload
         imageView.setOnClickListener(new View.OnClickListener() {

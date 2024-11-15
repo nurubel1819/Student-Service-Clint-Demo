@@ -1,5 +1,7 @@
 package com.example.studentserviceclintdemo.retrofit;
 
+import com.example.studentserviceclintdemo.model.CategoryModel;
+import com.example.studentserviceclintdemo.model.LocationModel;
 import com.example.studentserviceclintdemo.model.LoginModel;
 import com.example.studentserviceclintdemo.model.ProductGetDto;
 import com.example.studentserviceclintdemo.model.ProductUploadResponseDto;
@@ -57,5 +59,11 @@ public interface ApiInterface {
 
     @POST("/user/see_single_user")
     Call<UserModel> see_single_user_by_phone(@Body UserModel userModel);
+
+    @GET("/location/get_all_location")
+    Call<List<LocationModel>> get_all_location();
+
+    @GET("/product_category/see_all_category")
+    Call<List<CategoryModel>> get_all_category();
 
 }

@@ -29,6 +29,8 @@ import com.example.studentserviceclintdemo.MainActivity;
 import com.example.studentserviceclintdemo.R;
 import com.example.studentserviceclintdemo.helper.RealPathUtil;
 import com.example.studentserviceclintdemo.localDatabase.LocalDB;
+import com.example.studentserviceclintdemo.model.CategoryModel;
+import com.example.studentserviceclintdemo.model.LocationModel;
 import com.example.studentserviceclintdemo.model.LoginModel;
 import com.example.studentserviceclintdemo.model.ProductUploadResponseDto;
 import com.example.studentserviceclintdemo.retrofit.ApiInterface;
@@ -36,6 +38,7 @@ import com.example.studentserviceclintdemo.retrofit.RetrofitInstance;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -78,7 +81,7 @@ public class PostForProductActivity extends AppCompatActivity {
         description = findViewById(R.id.product_description_id);
 
         //code for category selection event
-        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getSelectedItem().toString();
@@ -90,24 +93,54 @@ public class PostForProductActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
-        ArrayList<String> product_category_list = new ArrayList<>();
-        product_category_list.add("Electronics");
-        product_category_list.add("Furniture");
 
-        ArrayAdapter<String> adapter_category = new ArrayAdapter<>(PostForProductActivity.this, android.R.layout.simple_spinner_item,product_category_list);
-        adapter_category.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-        category.setAdapter(adapter_category);
+        ApiInterface api = RetrofitInstance.getRetrofit().create(ApiInterface.class);
+        // find all category
+        api.get_all_category()
+                .enqueue(new Callback<List<CategoryModel>>() {
+                    @Override
+                    public void onResponse(Call<List<CategoryModel>> call, Response<List<CategoryModel>> response) {
+                        List<CategoryModel> all_category = response.body();
+                        ArrayList<String> category_list = new ArrayList<>();
+                        for(int i=0;i<all_category.size();i++)
+                        {
+                            category_list.add(all_category.get(i).getCategory());
+                        }
+                        ArrayAdapter<String> adapter_category = new ArrayAdapter<>(PostForProductActivity.this, android.R.layout.simple_spinner_item,category_list);
+                        adapter_category.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+                        category.setAdapter(adapter_category);
+                    }
 
-        // select location item
-        ArrayList<String> product_location_list = new ArrayList<>();
-        product_location_list.add("Pachuria");
-        product_location_list.add("gobra");
+                    @Override
+                    public void onFailure(Call<List<CategoryModel>> call, Throwable throwable) {
 
-        ArrayAdapter<String> adapter_location = new ArrayAdapter<>(PostForProductActivity.this, android.R.layout.simple_spinner_item,product_location_list);
-        adapter_location.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-        location.setAdapter(adapter_location);
+                    }
+                });
+
+        // find all location
+        ArrayList<String> location_list = new ArrayList<>();
+        api.get_all_location()
+                .enqueue(new Callback<List<LocationModel>>() {
+                    @Override
+                    public void onResponse(Call<List<LocationModel>> call, Response<List<LocationModel>> response) {
+                        List<LocationModel> all_location = response.body();
+                        // load all location server to app
+                        for(int i=0;i<all_location.size();i++)
+                        {
+                            location_list.add(all_location.get(i).getLocation());
+                        }
+                        ArrayAdapter<String> adapter_location = new ArrayAdapter<>(PostForProductActivity.this, android.R.layout.simple_spinner_item,location_list);
+                        adapter_location.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+                        location.setAdapter(adapter_location);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<LocationModel>> call, Throwable throwable) {
+                        Toast.makeText(PostForProductActivity.this,"Location not load",Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         // image selection
         imageView.setOnClickListener(new View.OnClickListener() {
