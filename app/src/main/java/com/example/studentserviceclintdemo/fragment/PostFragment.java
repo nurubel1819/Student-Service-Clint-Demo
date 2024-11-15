@@ -1,14 +1,20 @@
 package com.example.studentserviceclintdemo.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.studentserviceclintdemo.R;
+import com.example.studentserviceclintdemo.activity.PostForProductActivity;
+import com.example.studentserviceclintdemo.activity.PostForRentActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +22,8 @@ import com.example.studentserviceclintdemo.R;
  * create an instance of this fragment.
  */
 public class PostFragment extends Fragment {
+
+    Button sell_product,rent_house,teacher,student;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,5 +70,47 @@ public class PostFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_post, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // our code
+        // Find id
+        sell_product = view.findViewById(R.id.post_product_sell_id);
+        rent_house = view.findViewById(R.id.post_rent_house_id);
+        teacher = view.findViewById(R.id.post_teacher_id);
+        student = view.findViewById(R.id.post_student_id);
+
+        // click
+        sell_product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // code
+                startActivity(new Intent(getContext(), PostForProductActivity.class));
+            }
+        });
+
+        rent_house.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+                startActivity(new Intent(getContext(), PostForRentActivity.class));
+            }
+        });
+
+        teacher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+            }
+        });
+
+        student.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+            }
+        });
     }
 }

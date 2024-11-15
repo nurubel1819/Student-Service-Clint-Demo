@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.PostForRentActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <ImageView
+            android:id="@+id/rent_image_selection_id"
+            android:src="@drawable/imge_selection"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"/>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="Select Location : "/>
+            <Spinner
+                android:id="@+id/rent_location_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <EditText
+            android:id="@+id/rent_per_month_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Rent per month/ভাড়া কত"
+            android:layout_marginTop="10dp"
+            android:inputType="number"
+            android:background="@drawable/edit_text_bg"
+            android:padding="10dp"/>
+        <EditText
+            android:id="@+id/rent_floor_number_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Floor number/কত তলায়"
+            android:layout_marginTop="10dp"
+            android:inputType="phone"
+            android:background="@drawable/edit_text_bg"
+            android:padding="10dp"/>
+        <EditText
+            android:id="@+id/rent_member_number_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Member number/এক রুমে কয়জন"
+            android:layout_marginTop="10dp"
+            android:inputType="phone"
+            android:background="@drawable/edit_text_bg"
+            android:padding="10dp"/>
+        <EditText
+            android:id="@+id/rent_description_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description/অন্যান্য সুবিধা ও পুরো ঠিকানা"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_bg"
+            android:padding="10dp"/>
+        <Button
+            android:id="@+id/rent_upload_button_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>

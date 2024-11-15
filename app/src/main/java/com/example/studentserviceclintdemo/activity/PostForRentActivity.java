@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,8 +22,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import com.example.studentserviceclintdemo.MainActivity;
 import com.example.studentserviceclintdemo.R;
 import com.example.studentserviceclintdemo.helper.RealPathUtil;
 import com.example.studentserviceclintdemo.localDatabase.LocalDB;
@@ -44,79 +40,53 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostForProductActivity extends AppCompatActivity {
+public class PostForRentActivity extends AppCompatActivity {
 
+    Spinner location;
     ImageView imageView;
+    EditText price,floor,member,description;
+    Button upload;
 
-    Spinner category,location;
-
-    Button upload_button;
-
+    // image selection
     Uri selected_image_uri;
-    String image_real_path = "no_path";
-
-    EditText name,price,description;
+    String image_real_path="no_path";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_post_for_product);
+        setContentView(R.layout.activity_post_for_rent);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // id find
-        imageView = findViewById(R.id.image_selection_id);
-        category = findViewById(R.id.product_category_id);
-        location = findViewById(R.id.product_location_id);
-        upload_button = findViewById(R.id.upload_product_button_id);
-        name = findViewById(R.id.product_name_id);
-        price = findViewById(R.id.product_price);
-        description = findViewById(R.id.product_description_id);
-
-        //code for category selection event
-        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getSelectedItem().toString();
-                //String item_another = parent.getItemAtPosition(position).toString();
-                //Toast.makeText(PostForProductActivity.this,"item = "+item,Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        ArrayList<String> product_category_list = new ArrayList<>();
-        product_category_list.add("Electronics");
-        product_category_list.add("Furniture");
-
-        ArrayAdapter<String> adapter_category = new ArrayAdapter<>(PostForProductActivity.this, android.R.layout.simple_spinner_item,product_category_list);
-        adapter_category.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-        category.setAdapter(adapter_category);
+        location = findViewById(R.id.rent_location_id);
+        imageView = findViewById(R.id.rent_image_selection_id);
+        price = findViewById(R.id.rent_per_month_id);
+        floor = findViewById(R.id.rent_floor_number_id);
+        member = findViewById(R.id.rent_member_number_id);
+        description = findViewById(R.id.rent_description_id);
+        upload = findViewById(R.id.rent_upload_button_id);
 
         // select location item
-        ArrayList<String> product_location_list = new ArrayList<>();
-        product_location_list.add("Pachuria");
-        product_location_list.add("gobra");
+        ArrayList<String> location_list = new ArrayList<>();
+        location_list.add("Pachuria");
+        location_list.add("gobra");
 
-        ArrayAdapter<String> adapter_location = new ArrayAdapter<>(PostForProductActivity.this, android.R.layout.simple_spinner_item,product_location_list);
+        ArrayAdapter<String> adapter_location = new ArrayAdapter<>(PostForRentActivity.this, android.R.layout.simple_spinner_item,location_list);
         adapter_location.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         location.setAdapter(adapter_location);
 
-        // image selection
+        // image upload
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // code for image
-                if (ContextCompat.checkSelfPermission(PostForProductActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                if (ContextCompat.checkSelfPermission(PostForRentActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(PostForProductActivity.this,
+                    ActivityCompat.requestPermissions(PostForRentActivity.this,
                             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                             100);
                 }
@@ -129,25 +99,26 @@ public class PostForProductActivity extends AppCompatActivity {
         });
 
         // database work
-        LocalDB localDB = new LocalDB(PostForProductActivity.this);
+        LocalDB localDB = new LocalDB(PostForRentActivity.this);
         ArrayList<LoginModel> login_info = localDB.find_login_info();
 
-        // upload button work
-        upload_button.setOnClickListener(new View.OnClickListener() {
+        upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(image_real_path.equals("no_path") || name.getText().toString().isEmpty()
-                || category.getSelectedItem().toString().isEmpty() || price.getText().toString().isEmpty()
-                || location.getSelectedItem().toString().isEmpty() || description.getText().toString().isEmpty())
+                // upload work
+                if(image_real_path.equals("no_path")||location.getSelectedItem().toString().isEmpty()
+                ||price.getText().toString().isEmpty()||floor.getText().toString().isEmpty()
+                ||member.getText().toString().isEmpty()||description.getText().toString().isEmpty())
                 {
-                    Toast.makeText(PostForProductActivity.this,"select image and fill all text",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostForRentActivity.this,"select image and fill all text",Toast.LENGTH_SHORT).show();
                 }
                 else if(login_info.isEmpty())
                 {
-                    Toast.makeText(PostForProductActivity.this,"Login your account",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostForRentActivity.this,"Login your account",Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
+                    // upload code here
                     //convert it path to file
                     File file = new File(image_real_path);
 
@@ -159,24 +130,24 @@ public class PostForProductActivity extends AppCompatActivity {
                     String user_phone_number = login_info.get(0).getPhone();
 
                     RequestBody phone_number = RequestBody.create(MediaType.parse("multipart/form-data"),user_phone_number);
-                    RequestBody product_category = RequestBody.create(MediaType.parse("multipart/form-data"),category.getSelectedItem().toString());
-                    RequestBody product_name = RequestBody.create(MediaType.parse("multipart/form-data"),name.getText().toString());
-                    RequestBody product_price = RequestBody.create(MediaType.parse("multipart/form-data"),price.getText().toString());
-                    RequestBody product_location = RequestBody.create(MediaType.parse("multipart/form-data"),location.getSelectedItem().toString());
-                    RequestBody product_description = RequestBody.create(MediaType.parse("multipart/form-data"),description.getText().toString());
+                    RequestBody rent_location = RequestBody.create(MediaType.parse("multipart/form-data"),location.getSelectedItem().toString());
+
+                    RequestBody rent_price = RequestBody.create(MediaType.parse("multipart/form-data"),price.getText().toString());
+                    RequestBody rent_floor = RequestBody.create(MediaType.parse("multipart/form-data"),floor.getText().toString());
+                    RequestBody rent_member = RequestBody.create(MediaType.parse("multipart/form-data"),member.getText().toString());
+                    RequestBody rent_description = RequestBody.create(MediaType.parse("multipart/form-data"),description.getText().toString());
 
                     ApiInterface apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
-
-                    apiInterface.upload_product_details(body,phone_number,product_category,product_name,product_price,product_location,product_description)
+                    apiInterface.upload_rent_details(body,phone_number,rent_location,rent_price,rent_floor,rent_member,rent_description)
                             .enqueue(new Callback<ProductUploadResponseDto>() {
                                 @Override
                                 public void onResponse(Call<ProductUploadResponseDto> call, Response<ProductUploadResponseDto> response) {
-                                    Toast.makeText(PostForProductActivity.this,response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PostForRentActivity.this,response.body().getMessage(),Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override
                                 public void onFailure(Call<ProductUploadResponseDto> call, Throwable throwable) {
-                                    Toast.makeText(PostForProductActivity.this,"server error",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PostForRentActivity.this,"Server Error",Toast.LENGTH_SHORT).show();
                                 }
                             });
                 }
@@ -184,6 +155,7 @@ public class PostForProductActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -191,7 +163,7 @@ public class PostForProductActivity extends AppCompatActivity {
         {
             selected_image_uri = data.getData();
             imageView.setImageURI(selected_image_uri);
-            image_real_path = RealPathUtil.getRealPath(PostForProductActivity.this,selected_image_uri);
+            image_real_path = RealPathUtil.getRealPath(PostForRentActivity.this,selected_image_uri);
 
         }
     }

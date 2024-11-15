@@ -33,7 +33,7 @@ public interface ApiInterface {
     Call<List<UserModel>> see_all_user();
 
     @Multipart
-    @POST("/product/upload_with_image")
+    @POST("/product/upload_details_with_image")
     Call<ProductUploadResponseDto> upload_product_details(@Part MultipartBody.Part image,
                                                           @Part("phone") RequestBody phone,
                                                           @Part("category") RequestBody category,
@@ -41,6 +41,16 @@ public interface ApiInterface {
                                                           @Part("price") RequestBody price,
                                                           @Part("location") RequestBody location,
                                                           @Part("description") RequestBody description);
+    //rent house post upload
+    @Multipart
+    @POST("/rent/upload_details_with_image")
+    Call<ProductUploadResponseDto> upload_rent_details(@Part MultipartBody.Part image,
+                                                       @Part("phone") RequestBody phone,
+                                                       @Part("location") RequestBody location,
+                                                       @Part("price") RequestBody price,
+                                                       @Part("floor") RequestBody floor,
+                                                       @Part("member") RequestBody member,
+                                                       @Part("description") RequestBody description);
     //get all product information
     @GET("product/see_all_product")
     Call<List<ProductGetDto>> get_all_product();
