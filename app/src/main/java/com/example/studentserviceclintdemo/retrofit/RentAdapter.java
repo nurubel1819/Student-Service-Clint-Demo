@@ -53,7 +53,10 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.RentViewHolder
         holder.one_product_info_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, SingleRentViewActivity.class));
+                Intent intent = new Intent(context, SingleRentViewActivity.class);
+                intent.putExtra("phone_number",all_rent_list.get(position).getPhone());
+                intent.putExtra("rent_id",all_rent_list.get(position).getId());
+                context.startActivity(intent);
             }
         });
     }

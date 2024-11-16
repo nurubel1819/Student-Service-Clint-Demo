@@ -6,6 +6,7 @@ import com.example.studentserviceclintdemo.model.LoginModel;
 import com.example.studentserviceclintdemo.model.ProductGetDto;
 import com.example.studentserviceclintdemo.model.ProductUploadResponseDto;
 import com.example.studentserviceclintdemo.model.RentModel;
+import com.example.studentserviceclintdemo.model.SingleUploadLongModel;
 import com.example.studentserviceclintdemo.model.UserModel;
 import com.example.studentserviceclintdemo.model.UserRegistrationModel;
 
@@ -69,5 +70,8 @@ public interface ApiInterface {
 
     @GET("/rent/get_all")
     Call<List<RentModel>> get_all_rent_info();
+
+    @POST("/rent/find_by_id")
+    Call<RentModel> get_single_rent_info(@Body SingleUploadLongModel singleUploadLongModel);
 
 }
