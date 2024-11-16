@@ -25,10 +25,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button start_app_button;
-    Button test_user,test_file_upload,product_upload,test_bottom_nav;
-    TextView phone,password;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,63 +36,16 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // take component id
-        start_app_button = findViewById(R.id.start_app_button_id);
-        test_user = findViewById(R.id.test_user_info_button_id);
-        test_file_upload = findViewById(R.id.test_file_upload);
-        product_upload = findViewById(R.id.product_upload_test_id);
-        test_bottom_nav = findViewById(R.id.bottom_navigation_test_id);
-
-        phone = findViewById(R.id.main_phone);
-        password = findViewById(R.id.main_password);
-
-        //work with component
+        //Local database login confirmation
         LocalDB localDB = new LocalDB(MainActivity.this);
         ArrayList<LoginModel> login_info = localDB.find_login_info();
         if(login_info.isEmpty())
         {
-            Toast.makeText(MainActivity.this,"No login info found",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this,UserLoginActivity.class));
         }
         else
         {
-            phone.setText(login_info.get(0).getPhone());
-            password.setText(login_info.get(0).getPassword());
+            startActivity(new Intent(MainActivity.this,BottomNavigationActivity.class));
         }
-
-
-        start_app_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, UserLoginActivity.class));
-            }
-        });
-
-        test_user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, TestUserActivity.class));
-            }
-        });
-
-        test_file_upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, FileUploadActivity.class));
-            }
-        });
-
-        product_upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PostForProductActivity.class));
-            }
-        });
-
-        test_bottom_nav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, BottomNavigationActivity.class));
-            }
-        });
     }
 }

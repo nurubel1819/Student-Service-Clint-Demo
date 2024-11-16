@@ -5,6 +5,7 @@ import com.example.studentserviceclintdemo.model.LocationModel;
 import com.example.studentserviceclintdemo.model.LoginModel;
 import com.example.studentserviceclintdemo.model.ProductGetDto;
 import com.example.studentserviceclintdemo.model.ProductUploadResponseDto;
+import com.example.studentserviceclintdemo.model.RentModel;
 import com.example.studentserviceclintdemo.model.UserModel;
 import com.example.studentserviceclintdemo.model.UserRegistrationModel;
 
@@ -65,5 +66,8 @@ public interface ApiInterface {
 
     @GET("/product_category/see_all_category")
     Call<List<CategoryModel>> get_all_category();
+
+    @GET("/rent/get_all")
+    Call<List<RentModel>> get_all_rent_info();
 
 }
