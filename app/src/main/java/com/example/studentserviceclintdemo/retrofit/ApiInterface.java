@@ -74,4 +74,7 @@ public interface ApiInterface {
     @POST("/rent/find_by_id")
     Call<RentModel> get_single_rent_info(@Body SingleUploadLongModel singleUploadLongModel);
 
+    @POST("/product/find_by_id")
+    Call<ProductGetDto> get_single_product_info(@Body SingleUploadLongModel singleUploadLongModel);
+
 }

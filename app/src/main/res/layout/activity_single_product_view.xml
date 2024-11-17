@@ -7,4 +7,70 @@
     android:layout_height="match_parent"
     tools:context=".activity.SingleProductViewActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton_product_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/phone_icon" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/product_view_postman_name_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="পোস্ট দাতার নাম : " />
+
+        <TextView
+            android:id="@+id/product_view_phone_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ফোন নাম্বার : " />
+        <TextView
+            android:id="@+id/product_view_product_name_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="পণ্যের নাম : " />
+        <TextView
+            android:id="@+id/product_view_location_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="লোকেশন : " />
+        <TextView
+            android:id="@+id/product_view_category_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="পণ্যের ক্যাটাগরি : " />
+        <TextView
+            android:id="@+id/product_view_price_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="দাম : "
+            android:textColor="@color/red"
+            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/product_view_image_id"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/house_image" />
+        <TextView
+            android:id="@+id/product_view_description_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="description : " />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

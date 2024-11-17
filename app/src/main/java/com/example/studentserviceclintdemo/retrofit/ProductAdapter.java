@@ -54,6 +54,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
                 // some change in
                 Intent intent = new Intent(context, SingleProductViewActivity.class);
+                intent.putExtra("phone_number",all_product_list.get(position).getPhone());
+                intent.putExtra("product_id",all_product_list.get(position).getId());
                 context.startActivity(intent);
             }
         });
