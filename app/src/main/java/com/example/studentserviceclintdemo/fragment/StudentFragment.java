@@ -2,13 +2,28 @@ package com.example.studentserviceclintdemo.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.studentserviceclintdemo.R;
+import com.example.studentserviceclintdemo.adapter.StudentAdapter;
+import com.example.studentserviceclintdemo.model.StudentModel;
+import com.example.studentserviceclintdemo.retrofit.ApiInterface;
+import com.example.studentserviceclintdemo.retrofit.RetrofitInstance;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +31,8 @@ import com.example.studentserviceclintdemo.R;
  * create an instance of this fragment.
  */
 public class StudentFragment extends Fragment {
+
+    RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,5 +79,31 @@ public class StudentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_student, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // my code here
+        recyclerView = view.findViewById(R.id.student_recycle_view_id);
+
+        ApiInterface apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
+        apiInterface.get_all_student()
+                .enqueue(new Callback<List<StudentModel>>() {
+                    @Override
+                    public void onResponse(Call<List<StudentModel>> call, Response<List<StudentModel>> response) {
+                        List<StudentModel> all_student = response.body();
+                        StudentAdapter adapter = new StudentAdapter(getContext(),all_student);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        recyclerView.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<StudentModel>> call, Throwable throwable) {
+                        Toast.makeText(getContext(),"Data can't load, Server error",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 }

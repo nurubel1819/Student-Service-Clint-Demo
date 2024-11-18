@@ -205,7 +205,8 @@ public class PostForProductActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<ProductUploadResponseDto> call, Response<ProductUploadResponseDto> response) {
                                     Toast.makeText(PostForProductActivity.this,response.body().getMessage(),Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(PostForProductActivity.this,BottomNavigationActivity.class));
+                                    //startActivity(new Intent(PostForProductActivity.this,BottomNavigationActivity.class));
+                                    finish();
                                 }
 
                                 @Override

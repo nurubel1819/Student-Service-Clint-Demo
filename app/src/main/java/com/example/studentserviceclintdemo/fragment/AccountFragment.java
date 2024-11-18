@@ -138,6 +138,7 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 LocalDB localDB1 = new LocalDB(getContext());
                 localDB1.delete_login_info();
+                requireActivity().finish();
                 startActivity(new Intent(getContext(), MainActivity.class));
             }
         });

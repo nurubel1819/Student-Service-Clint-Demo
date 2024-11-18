@@ -160,7 +160,8 @@ public class PostForRentActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<ProductUploadResponseDto> call, Response<ProductUploadResponseDto> response) {
                                     Toast.makeText(PostForRentActivity.this,response.body().getMessage(),Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(PostForRentActivity.this,BottomNavigationActivity.class));
+                                    //startActivity(new Intent(PostForRentActivity.this,BottomNavigationActivity.class));
+                                    finish();
                                 }
 
                                 @Override

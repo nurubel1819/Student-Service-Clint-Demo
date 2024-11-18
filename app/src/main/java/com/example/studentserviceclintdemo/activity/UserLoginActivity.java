@@ -76,6 +76,7 @@ public class UserLoginActivity extends AppCompatActivity {
                                     LocalDB localDB = new LocalDB(UserLoginActivity.this);
                                     localDB.addLoginInfo(phone,pass);
                                     Toast.makeText(UserLoginActivity.this,"Login successful",Toast.LENGTH_SHORT).show();
+                                    finish();
                                     startActivity(new Intent(UserLoginActivity.this,BottomNavigationActivity.class));
                                 }
                                 else Toast.makeText(UserLoginActivity.this,"Invalid phone or password",Toast.LENGTH_SHORT).show();
