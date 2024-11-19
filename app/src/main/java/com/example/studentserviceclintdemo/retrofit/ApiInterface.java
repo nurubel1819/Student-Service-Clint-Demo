@@ -3,7 +3,7 @@ package com.example.studentserviceclintdemo.retrofit;
 import com.example.studentserviceclintdemo.model.CategoryModel;
 import com.example.studentserviceclintdemo.model.LocationModel;
 import com.example.studentserviceclintdemo.model.LoginModel;
-import com.example.studentserviceclintdemo.model.ProductGetDto;
+import com.example.studentserviceclintdemo.model.ProductModel;
 import com.example.studentserviceclintdemo.model.ProductUploadResponseDto;
 import com.example.studentserviceclintdemo.model.RentModel;
 import com.example.studentserviceclintdemo.model.SingleUploadLongModel;
@@ -58,7 +58,7 @@ public interface ApiInterface {
                                                        @Part("description") RequestBody description);
     //get all product information
     @GET("product/see_all_product")
-    Call<List<ProductGetDto>> get_all_product();
+    Call<List<ProductModel>> get_all_product();
 
     @POST("/user/see_single_user")
     Call<UserModel> see_single_user_by_phone(@Body UserModel userModel);
@@ -76,8 +76,14 @@ public interface ApiInterface {
     Call<RentModel> get_single_rent_info(@Body SingleUploadLongModel singleUploadLongModel);
 
     @POST("/product/find_by_id")
-    Call<ProductGetDto> get_single_product_info(@Body SingleUploadLongModel singleUploadLongModel);
+    Call<ProductModel> get_single_product_info(@Body SingleUploadLongModel singleUploadLongModel);
 
     @GET("/student/get_all_student")
     Call<List<StudentModel>> get_all_student();
+
+    @POST("/product/find_by_category_and_location")
+    Call<List<ProductModel>> find_by_category_and_location(@Body ProductModel productGetDto);
+
+    @POST("/product/filter_name")
+    Call<List<ProductModel>> filter_by_product_name(@Body ProductModel productModel);
 }

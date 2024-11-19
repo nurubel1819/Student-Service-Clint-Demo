@@ -9,13 +9,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cat : "/>
+            <Spinner
+                android:id="@+id/filter_product_category_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loc"/>
+            <Spinner
+                android:id="@+id/filter_product_location_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/filter_product_button_id"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/filter_icon"/>
+        </LinearLayout>
         <EditText
             android:id="@+id/search_product_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_bg"
             android:hint="search product"
-            android:textSize="25sp"/>
+            android:padding="10dp"
+            android:textSize="15sp"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_recycle_view_id"
             android:layout_width="match_parent"

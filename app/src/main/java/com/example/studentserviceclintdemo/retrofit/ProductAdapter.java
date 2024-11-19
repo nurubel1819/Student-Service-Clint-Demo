@@ -15,16 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.studentserviceclintdemo.R;
 import com.example.studentserviceclintdemo.activity.SingleProductViewActivity;
-import com.example.studentserviceclintdemo.model.ProductGetDto;
+import com.example.studentserviceclintdemo.model.ProductModel;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     Context context;
-    List<ProductGetDto> all_product_list;
+    List<ProductModel> all_product_list;
 
-    public ProductAdapter(Context context, List<ProductGetDto> all_product_list) {
+    public ProductAdapter(Context context, List<ProductModel> all_product_list) {
         this.context = context;
         this.all_product_list = all_product_list;
     }

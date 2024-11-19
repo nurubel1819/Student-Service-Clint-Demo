@@ -1,6 +1,6 @@
 package com.example.studentserviceclintdemo.model;
 
-public class ProductGetDto {
+public class ProductModel {
     private Long id;
     private String phone;
     private String image;
@@ -10,7 +10,7 @@ public class ProductGetDto {
     private String location;
     private String description;
 
-    public ProductGetDto() {
+    public ProductModel() {
     }
 
     public Long getId() {

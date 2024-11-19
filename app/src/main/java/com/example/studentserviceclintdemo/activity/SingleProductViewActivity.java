@@ -16,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.studentserviceclintdemo.R;
-import com.example.studentserviceclintdemo.model.ProductGetDto;
+import com.example.studentserviceclintdemo.model.ProductModel;
 import com.example.studentserviceclintdemo.model.SingleUploadLongModel;
 import com.example.studentserviceclintdemo.model.UserModel;
 import com.example.studentserviceclintdemo.retrofit.ApiInterface;
@@ -82,10 +82,10 @@ public class SingleProductViewActivity extends AppCompatActivity {
         SingleUploadLongModel singleUploadLongModel = new SingleUploadLongModel();
         singleUploadLongModel.setId(product_id);
         apiInterface.get_single_product_info(singleUploadLongModel)
-                .enqueue(new Callback<ProductGetDto>() {
+                .enqueue(new Callback<ProductModel>() {
                     @Override
-                    public void onResponse(Call<ProductGetDto> call, Response<ProductGetDto> response) {
-                        ProductGetDto model = response.body();
+                    public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
+                        ProductModel model = response.body();
                         product_name.setText(product_name.getText()+model.getName());
                         location.setText(location.getText()+model.getLocation());
                         category.setText(category.getText()+model.getCategory());
@@ -97,7 +97,7 @@ public class SingleProductViewActivity extends AppCompatActivity {
                         Glide.with(SingleProductViewActivity.this).load(image_url).into(imageView);
                     }
                     @Override
-                    public void onFailure(Call<ProductGetDto> call, Throwable throwable) {
+                    public void onFailure(Call<ProductModel> call, Throwable throwable) {
                         Toast.makeText(SingleProductViewActivity.this,"Post data can't load",Toast.LENGTH_SHORT).show();
                     }
                 });
