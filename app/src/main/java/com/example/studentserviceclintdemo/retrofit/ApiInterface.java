@@ -81,9 +81,12 @@ public interface ApiInterface {
     @GET("/student/get_all_student")
     Call<List<StudentModel>> get_all_student();
 
-    @POST("/product/find_by_category_and_location")
+    @POST("/product/find_by_category_and_price")
     Call<List<ProductModel>> find_by_category_and_location(@Body ProductModel productGetDto);
 
     @POST("/product/filter_name")
     Call<List<ProductModel>> filter_by_product_name(@Body ProductModel productModel);
+
+    @POST("/rent/filter_all")
+    Call<List<RentModel>> filter_rent_all(@Body RentModel rentModel);
 }

@@ -43,8 +43,8 @@ public class ProductFragment extends Fragment {
 
     // code here rubel
     Button filter_button;
-    Spinner category,location;
-    EditText search_product;
+    Spinner category;
+    EditText search_product,price;
     RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -101,8 +101,8 @@ public class ProductFragment extends Fragment {
 
         filter_button = view.findViewById(R.id.filter_product_button_id);
         category = view.findViewById(R.id.filter_product_category_id);
-        location = view.findViewById(R.id.filter_product_location_id);
         search_product = view.findViewById(R.id.search_product_id);
+        price = view.findViewById(R.id.filter_product_price_id);
         recyclerView = view.findViewById(R.id.product_recycle_view_id);
 
         ApiInterface apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
@@ -129,7 +129,7 @@ public class ProductFragment extends Fragment {
                     }
                 });
         // load location list in drop down menu
-        ArrayList<String> location_list = new ArrayList<>();
+        /*ArrayList<String> location_list = new ArrayList<>();
         location_list.add("All");
         apiInterface.get_all_location()
                 .enqueue(new Callback<List<LocationModel>>() {
@@ -150,7 +150,7 @@ public class ProductFragment extends Fragment {
                     public void onFailure(Call<List<LocationModel>> call, Throwable throwable) {
                         Toast.makeText(getContext(),"Location not load",Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
 
         // load all product
         recyclerView.removeAllViewsInLayout();
@@ -179,7 +179,9 @@ public class ProductFragment extends Fragment {
 
                 ProductModel model = new ProductModel();
                 model.setCategory(category.getSelectedItem().toString());
-                model.setLocation(location.getSelectedItem().toString());
+                double product_price = -1;
+                if(!price.getText().toString().isEmpty()) product_price = Double.parseDouble(price.getText().toString());
+                model.setPrice(product_price);
 
                 apiInterface.find_by_category_and_location(model)
                         .enqueue(new Callback<List<ProductModel>>() {

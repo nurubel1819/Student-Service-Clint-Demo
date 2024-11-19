@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
+            //Toast.makeText(MainActivity.this,login_info.get(0).getPhone(),Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this,BottomNavigationActivity.class));
         }
         finish();

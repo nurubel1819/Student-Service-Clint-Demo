@@ -77,11 +77,11 @@ public class TutorFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // find by id
-        tabLayout = view.findViewById(R.id.tab_layout);
+        /*tabLayout = view.findViewById(R.id.tab_layout);
         viewPager = view.findViewById(R.id.view_pager);
 
         View_pager_Messenger_Adapter adapter = new View_pager_Messenger_Adapter(requireActivity().getSupportFragmentManager());
         viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);*/
     }
 }
