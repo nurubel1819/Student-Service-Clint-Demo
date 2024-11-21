@@ -15,6 +15,7 @@ import android.widget.Button;
 import com.example.studentserviceclintdemo.R;
 import com.example.studentserviceclintdemo.activity.PostForProductActivity;
 import com.example.studentserviceclintdemo.activity.PostForRentActivity;
+import com.example.studentserviceclintdemo.activity.StudentActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -110,6 +111,7 @@ public class PostFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //
+                startActivity(new Intent(getContext(), StudentActivity.class));
             }
         });
     }

@@ -10,10 +10,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 
 import com.example.studentserviceclintdemo.R;
-import com.example.studentserviceclintdemo.retrofit.View_pager_Messenger_Adapter;
 import com.google.android.material.tabs.TabLayout;
 
 /**

@@ -7,7 +7,8 @@ import com.example.studentserviceclintdemo.model.ProductModel;
 import com.example.studentserviceclintdemo.model.ProductUploadResponseDto;
 import com.example.studentserviceclintdemo.model.RentModel;
 import com.example.studentserviceclintdemo.model.SingleUploadLongModel;
-import com.example.studentserviceclintdemo.model.StudentModel;
+import com.example.studentserviceclintdemo.model.SingleResponseModel;
+import com.example.studentserviceclintdemo.model.TuitionModel;
 import com.example.studentserviceclintdemo.model.UserModel;
 import com.example.studentserviceclintdemo.model.UserRegistrationModel;
 
@@ -78,9 +79,6 @@ public interface ApiInterface {
     @POST("/product/find_by_id")
     Call<ProductModel> get_single_product_info(@Body SingleUploadLongModel singleUploadLongModel);
 
-    @GET("/student/get_all_student")
-    Call<List<StudentModel>> get_all_student();
-
     @POST("/product/find_by_category_and_price")
     Call<List<ProductModel>> find_by_category_and_location(@Body ProductModel productGetDto);
 
@@ -89,4 +87,7 @@ public interface ApiInterface {
 
     @POST("/rent/filter_all")
     Call<List<RentModel>> filter_rent_all(@Body RentModel rentModel);
+
+    @POST("/student/upload_new_student")
+    Call<SingleResponseModel> upload_new_student(@Body TuitionModel tuitionModel);
 }

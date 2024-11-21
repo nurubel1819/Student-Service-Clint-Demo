@@ -1,6 +1,8 @@
 package com.example.studentserviceclintdemo.fragment;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,10 +17,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.studentserviceclintdemo.R;
+import com.example.studentserviceclintdemo.activity.FacebookViewActivity;
 import com.example.studentserviceclintdemo.model.LocationModel;
 import com.example.studentserviceclintdemo.model.RentModel;
 import com.example.studentserviceclintdemo.retrofit.ApiInterface;
@@ -41,6 +45,7 @@ public class HomeFragment extends Fragment {
 
     RecyclerView recyclerView;
     Button filter;
+    ImageView facebook;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -96,6 +101,17 @@ public class HomeFragment extends Fragment {
         // my code here
         recyclerView = view.findViewById(R.id.rent_recycle_view_id);
         filter = view.findViewById(R.id.filter_rent_id);
+        facebook = view.findViewById(R.id.facebook_go_to_id);
+
+        facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //startActivity(new Intent(getContext(), FacebookViewActivity.class));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/groups/bsmrstumess"));
+                startActivity(browserIntent);
+
+            }
+        });
 
         ApiInterface apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
 
