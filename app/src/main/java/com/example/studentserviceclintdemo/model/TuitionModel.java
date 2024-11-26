@@ -7,7 +7,7 @@ public class TuitionModel {
     private String version;
     private String name;
     private String phone;
-    private String department;
+    private String faculty;
     private String grp;
     private String location;
     private String gender;
@@ -18,18 +18,18 @@ public class TuitionModel {
     public TuitionModel() {
     }
 
-    public TuitionModel(Long id, String category, String institute, String version, String name, String phone, String department, String grp, String location, String gender, int cls, double fee, String description) {
+    public TuitionModel(Long id, String category, String version, String institute, String name, String phone, String faculty, String grp, String location, int cls, String gender, double fee, String description) {
         this.id = id;
         this.category = category;
-        this.institute = institute;
         this.version = version;
+        this.institute = institute;
         this.name = name;
         this.phone = phone;
-        this.department = department;
+        this.faculty = faculty;
         this.grp = grp;
         this.location = location;
-        this.gender = gender;
         this.cls = cls;
+        this.gender = gender;
         this.fee = fee;
         this.description = description;
     }
@@ -82,12 +82,12 @@ public class TuitionModel {
         this.phone = phone;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getFaculty() {
+        return faculty;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 
     public String getGrp() {

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_lightin"
+    tools:context=".activity.TeacherActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teacher Details"
+            android:textAlignment="center"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+        <EditText
+            android:id="@+id/teacher_name_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Teacher Name"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_bg"
+            android:padding="7dp"/>
+        <EditText
+            android:id="@+id/teacher_institute_name_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Institute Name"
+            android:background="@drawable/edit_text_bg"
+            android:padding="7dp"
+            android:layout_marginTop="5dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:text="Faculty : "/>
+            <Spinner
+                android:id="@+id/teacher_department_id"
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:background="@color/white"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location : "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+            <Spinner
+                android:id="@+id/teacher_location_id"
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:background="@color/white"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender : "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+            <Spinner
+                android:id="@+id/teacher_gender_id"
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:background="@color/white"/>
+        </LinearLayout>
+        <EditText
+            android:id="@+id/teacher_fee_id_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginTop="5dp"
+            android:hint="Want to tuition fees"
+            android:inputType="phone"/>
+        <EditText
+            android:id="@+id/teacher_description_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginTop="5dp"
+            android:padding="7dp"/>
+        <Button
+            android:id="@+id/teacher_upload_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            android:textColor="@color/white"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="10dp"/>
+
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

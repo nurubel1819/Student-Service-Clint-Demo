@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:background="@color/sky_blue"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -20,12 +21,16 @@
             android:textColor="@color/black"
             android:textSize="30sp"/>
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:text="Rent: "/>
             <EditText
                 android:id="@+id/filter_rent_price_id"
@@ -34,53 +39,63 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/edit_text_bg"
-                android:hint="Rent per  month tk"
-                android:padding="5dp"/>
+                android:hint="Rent less then per month tk"
+                android:padding="7dp"/>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/set_location_icon"/>
             <TextView
-                android:layout_marginLeft="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:text="Location : "/>
             <Spinner
                 android:id="@+id/filter_rent_location_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:background="@color/white"
+                android:layout_width="150dp"
+                android:layout_height="35dp"/>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:text="Member Lessthan : "/>
             <Spinner
                 android:id="@+id/filter_rent_member_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:background="@color/white"
+                android:layout_width="150dp"
+                android:layout_height="35dp"/>
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:text="Floor Lessthan : "/>
             <Spinner
                 android:id="@+id/filter_rent_floor_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:background="@color/white"
+                android:layout_width="150dp"
+                android:layout_height="35dp"/>
         </LinearLayout>
 
         <Button

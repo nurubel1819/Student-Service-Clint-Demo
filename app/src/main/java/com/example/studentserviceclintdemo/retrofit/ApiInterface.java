@@ -88,6 +88,10 @@ public interface ApiInterface {
     @POST("/rent/filter_all")
     Call<List<RentModel>> filter_rent_all(@Body RentModel rentModel);
 
-    @POST("/student/upload_new_student")
+    @POST("/tuition/upload_new_student")
     Call<SingleResponseModel> upload_new_student(@Body TuitionModel tuitionModel);
+
+    @POST("/tuition/upload_new_teacher")
+    Call<SingleResponseModel> upload_new_teacher(@Body TuitionModel tuitionModel);
+
 }

@@ -70,7 +70,12 @@ public class UserRegistrationActivity extends AppCompatActivity {
                             .enqueue(new Callback<UserRegistrationModel>() {
                                 @Override
                                 public void onResponse(Call<UserRegistrationModel> call, Response<UserRegistrationModel> response) {
-                                    Toast.makeText(UserRegistrationActivity.this,"Registration successful",Toast.LENGTH_SHORT).show();
+                                    if(response.body()!=null)
+                                    {
+                                        Toast.makeText(UserRegistrationActivity.this,"Registration successful",Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                    else Toast.makeText(UserRegistrationActivity.this,"Registration failed,This phone number may me exist in DB",Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override
@@ -80,7 +85,6 @@ public class UserRegistrationActivity extends AppCompatActivity {
                             });
 
                 }
-                finish();
             }
         });
     }

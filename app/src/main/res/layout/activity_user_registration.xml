@@ -37,7 +37,7 @@
             android:background="@drawable/edit_text_bg"
             android:padding="10dp"
             android:id="@+id/user_phone_id"
-            android:inputType="number"
+            android:inputType="phone"
             android:hint="Your phone number"/>
         <EditText
             android:layout_width="match_parent"
