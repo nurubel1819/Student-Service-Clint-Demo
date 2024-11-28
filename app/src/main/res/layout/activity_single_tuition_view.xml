@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SingleTuitionViewActivity">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton_tuition_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/phone_icon" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tuition_view_name_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="পোস্ট দাতার নাম : " />
+
+        <TextView
+            android:id="@+id/tuition_view_phone_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ফোন নাম্বার : " />
+        <TextView
+            android:id="@+id/tuition_view_location_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="লোকেশন : " />
+        <TextView
+            android:id="@+id/tuition_view_category_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Category : "/>
+        <TextView
+            android:id="@+id/tuition_view_institute_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Institute : "/>
+        <TextView
+            android:id="@+id/tuition_view_version_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Version : "/>
+        <TextView
+            android:id="@+id/tuition_view_faculty_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Faculty : "/>
+        <TextView
+            android:id="@+id/tuition_view_group_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Group : "/>
+        <TextView
+            android:id="@+id/tuition_view_gender_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gender : "/>
+        <TextView
+            android:id="@+id/tuition_view_class_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Class : "/>
+        <TextView
+            android:id="@+id/tuition_view_fee_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fee : "
+            android:textColor="@color/red"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/tuition_view_image_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/tuition_icon" />
+
+        <TextView
+            android:id="@+id/tuition_view_description_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="description : " />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -126,6 +126,7 @@ public class TeacherActivity extends AppCompatActivity {
                     model.setFaculty(faculty.getSelectedItem().toString());
                     model.setLocation(location.getSelectedItem().toString());
                     model.setGender(gender.getSelectedItem().toString());
+                    model.setCls(0);
                     model.setFee(Double.parseDouble(fee.getText().toString()));
                     model.setDescription(description.getText().toString());
 

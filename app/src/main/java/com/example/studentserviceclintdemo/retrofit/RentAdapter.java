@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.studentserviceclintdemo.R;
-import com.example.studentserviceclintdemo.activity.SingleProductViewActivity;
 import com.example.studentserviceclintdemo.activity.SingleRentViewActivity;
 import com.example.studentserviceclintdemo.model.RentModel;
 
@@ -35,7 +34,7 @@ public class RentAdapter extends RecyclerView.Adapter<RentAdapter.RentViewHolder
     public RentAdapter.RentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.one_rent_view,parent,false);
-        return new RentViewHolder(view);
+        return new RentAdapter.RentViewHolder(view);
     }
 
     @Override

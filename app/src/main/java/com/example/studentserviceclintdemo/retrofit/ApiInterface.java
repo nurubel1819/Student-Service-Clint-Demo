@@ -94,4 +94,10 @@ public interface ApiInterface {
     @POST("/tuition/upload_new_teacher")
     Call<SingleResponseModel> upload_new_teacher(@Body TuitionModel tuitionModel);
 
+    @GET("/tuition/get_all_tuition")
+    Call<List<TuitionModel>> get_all_tuition();
+
+    @POST("/tuition/find_by_id")
+    Call<TuitionModel> get_single_tuition_info(@Body SingleUploadLongModel model);
+
 }

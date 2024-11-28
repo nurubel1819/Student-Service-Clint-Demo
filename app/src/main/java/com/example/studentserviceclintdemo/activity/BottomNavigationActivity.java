@@ -18,7 +18,7 @@ import com.example.studentserviceclintdemo.fragment.AccountFragment;
 import com.example.studentserviceclintdemo.fragment.HomeFragment;
 import com.example.studentserviceclintdemo.fragment.PostFragment;
 import com.example.studentserviceclintdemo.fragment.ProductFragment;
-import com.example.studentserviceclintdemo.fragment.TutorFragment;
+import com.example.studentserviceclintdemo.fragment.TuitionFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BottomNavigationActivity extends AppCompatActivity {
@@ -48,7 +48,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
                     replace_fragment(new HomeFragment());
                 }
                 else if(id==R.id.tutor_menu_id){
-                    replace_fragment(new TutorFragment());
+                    replace_fragment(new TuitionFragment());
                 }
                 else if(id==R.id.post_menu_id){
                     replace_fragment(new PostFragment());
