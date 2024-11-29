@@ -22,7 +22,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.studentserviceclintdemo.R;
-import com.example.studentserviceclintdemo.activity.FacebookViewActivity;
 import com.example.studentserviceclintdemo.model.LocationModel;
 import com.example.studentserviceclintdemo.model.RentModel;
 import com.example.studentserviceclintdemo.retrofit.ApiInterface;
@@ -137,7 +136,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.daylog_rent_filter);
+                dialog.setContentView(R.layout.dialog_rent_filter);
 
                 // find dialog id
                 EditText price = dialog.findViewById(R.id.filter_rent_price_id);

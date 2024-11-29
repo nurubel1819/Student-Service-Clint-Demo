@@ -100,4 +100,7 @@ public interface ApiInterface {
     @POST("/tuition/find_by_id")
     Call<TuitionModel> get_single_tuition_info(@Body SingleUploadLongModel model);
 
+    @POST("/tuition/filter_all")
+    Call<List<TuitionModel>> filter_tuition_all(@Body TuitionModel model);
+
 }
